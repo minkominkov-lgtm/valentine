@@ -65,7 +65,6 @@
     #noBtn { background-color: transparent; color: #555; border-color: #333; left: 30px; top: 20px; }
 
     #successMessage { display: none; }
-    #successMessage h1 { font-size: 32px; letter-spacing: 6px; }
   </style>
 </head>
 <body>
@@ -95,9 +94,9 @@
 
     <div id="successMessage" class="card">
        <div style="font-size: 40px; margin-bottom: 20px;">✨🥂✨</div>
-       <h1>OBJECTION OVERRULED</h1>
-       <div style="width: 50px; height: 1px; background: #b76e79; margin: 25px auto;"></div>
-       <p style="color: #fff; font-size: 16px; letter-spacing: 4px; text-transform: uppercase; font-weight: 300; line-height: 1.6;">
+       <h1 style="font-size: 32px; letter-spacing: 6px;">OBJECTION OVERRULED</h1>
+       <div style="width: 60px; height: 1px; background: #b76e79; margin: 25px auto;"></div>
+       <p style="color: #fff; font-size: 16px; letter-spacing: 4px; text-transform: uppercase; font-weight: 300; line-height: 1.8;">
          You’re officially my<br>Valentine, Darling.
        </p>
     </div>
@@ -109,6 +108,8 @@
     const noBtn = document.getElementById("noBtn");
     const music = document.getElementById("vibeMusic");
     const video = document.getElementById("bgVideo");
+    
+    // Smooth cinematic playback rate
     video.playbackRate = 0.75;
 
     function moveNo() {
@@ -122,8 +123,12 @@
     function yesClicked() {
       const count = 250;
       const defaults = { origin: { y: 0.6 }, colors: ['#b76e79', '#ffffff', '#e1b1b9'] };
+      
       confetti({ ...defaults, particleCount: count, spread: 100 });
-      music.play().catch(error => console.log("Music play blocked:", error));
+      
+      // Start music only after user clicks "Yes"
+      music.play().catch(e => console.log("Audio play failed:", e));
+
       document.getElementById("vCard").style.display = "none";
       document.getElementById("successMessage").style.display = "block";
     }
