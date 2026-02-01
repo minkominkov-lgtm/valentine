@@ -11,11 +11,10 @@
       font-family: 'Montserrat', sans-serif; overflow: hidden; background-color: #000;
     }
 
-    /* Video Background */
     #bgVideo {
       position: fixed; right: 0; bottom: 0; min-width: 100%; min-height: 100%;
       z-index: -1; object-fit: cover; 
-      filter: grayscale(0.2) sepia(0.4) brightness(0.4); /* Darker for better text contrast */
+      filter: grayscale(0.2) sepia(0.4) brightness(0.4);
     }
 
     .overlay {
@@ -29,7 +28,6 @@
       z-index: 2; position: relative;
     }
 
-    /* Art Deco Card */
     .card {
       background: rgba(10, 10, 10, 0.95); border: 2px solid #b76e79;
       padding: 60px; border-radius: 4px; text-align: center; width: 450px;
@@ -37,7 +35,6 @@
       position: relative;
     }
 
-    /* Geometric gold/rose line inside */
     .card::after {
       content: ""; position: absolute; top: 15px; left: 15px; right: 15px; bottom: 15px;
       border: 1px solid rgba(183, 110, 121, 0.4); pointer-events: none;
@@ -67,10 +64,8 @@
 
     #noBtn { background-color: transparent; color: #555; border-color: #333; left: 30px; top: 20px; }
 
-    /* Polished Success Page */
     #successMessage { display: none; }
     #successMessage h1 { font-size: 32px; letter-spacing: 6px; }
-    .cheers { font-size: 40px; margin-bottom: 20px; }
   </style>
 </head>
 <body>
@@ -99,7 +94,7 @@
     </div>
 
     <div id="successMessage" class="card">
-       <div class="cheers">✨🥂✨</div>
+       <div style="font-size: 40px; margin-bottom: 20px;">✨🥂✨</div>
        <h1>OBJECTION OVERRULED</h1>
        <div style="width: 50px; height: 1px; background: #b76e79; margin: 25px auto;"></div>
        <p style="color: #fff; font-size: 16px; letter-spacing: 4px; text-transform: uppercase; font-weight: 300; line-height: 1.6;">
@@ -114,8 +109,6 @@
     const noBtn = document.getElementById("noBtn");
     const music = document.getElementById("vibeMusic");
     const video = document.getElementById("bgVideo");
-    
-    // Smooth slow-mo
     video.playbackRate = 0.75;
 
     function moveNo() {
@@ -129,14 +122,8 @@
     function yesClicked() {
       const count = 250;
       const defaults = { origin: { y: 0.6 }, colors: ['#b76e79', '#ffffff', '#e1b1b9'] };
-      
       confetti({ ...defaults, particleCount: count, spread: 100 });
-      
-      // Try to play music
-      music.play().catch(error => {
-        console.log("Music play failed - likely browser block:", error);
-      });
-
+      music.play().catch(error => console.log("Music play blocked:", error));
       document.getElementById("vCard").style.display = "none";
       document.getElementById("successMessage").style.display = "block";
     }
